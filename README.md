@@ -10,10 +10,12 @@
 
 #### <i>[subject](_subject/en.subject.pdf) v.2</i>
 
-## 🌳 - Project tree
+<details>
+<summary><i><b>Project Structure  📂</b></i></summary>
 
 ``` js
 ├── README.md
+├── LICENSE
 ├── _notebook
 │   └── ipv4_calculator.ipynb
 ├── _subject
@@ -31,6 +33,14 @@
     ├── level9.json
     └── level10.json
 ```
+</details>
+
+## 📌 - Key Topics
+
+### TCP/IP Addressing
+TCP/IP addressing forms the backbone of modern network communication. 
+
+This project focuses on gaining a practical understanding of IP addresses, subnet masks, routers, and how they interact within a network to facilitate communication between devices.
 
 ## 📈 - [IPv4 Calculator](_notebook/ipv4_calculator.ipynb)
 
@@ -49,25 +59,21 @@ Calculate the network address from the IP address and netmask.
 
 ```python
 # IP Address ----------------------------------------------------------------->
-
 ip_addr = input("IP Address [xxx.xxx.xxx.xxx]: ")
 ip_addr_b = " ".join("{:08b}".format(int(byte)) for byte in ip_addr.split("."))
 
 # Netmask -------------------------------------------------------------------->
-
 netmask = int(input("Netmask [CIDR notation]: "))
 netmask_b = "".join('1' if i < netmask else '0' for i in range(32))
 netmask_b = " ".join(netmask_b[i:(i + 8)] for i in range(0, 32, 8))
 
 # Network Address ------------------------------------------------------------>
-
 network_addr_bin = "".join(str(int(ip_addr_b[i]) & int(netmask_b[i])) if 
     ip_addr_b[i] != " " else " " for i in range(35))
 network_addr = "".join(str(int(byte, 2)) + "." for byte in 
     network_addr_bin.split(" ")).strip(".")
 
 # Visualization -------------------------------------------------------------->
-
 print(
 	f"IP Address         {ip_addr_b} -> {ip_addr}\n"
 	f"                                   AND\n"
@@ -93,7 +99,6 @@ Calculate broadcast address from the network address.
 
 ```python
 # Network Address ------------------------------------------------------------>
-
 network = input("Network Address [xxx.xxx.xxx.xxx/xx]: ")
 netmask = int(network[-2:])
 network_addr = network[:-3]
@@ -101,13 +106,11 @@ network_addr_b = "".join("{:08b}".format(int(byte)) for byte in
     network_addr.split("."))
 
 # Broadcast Address ---------------------------------------------------------->
-
 broadcast_addr_b = network_addr_b[:netmask] + '1' * (32 - netmask)
 broadcast_addr = ".".join(str(int(broadcast_addr_b[i:i+8], 2)) for i in 
     range(0, 32, 8))
 
 # Visualization -------------------------------------------------------------->
-
 def add_spaces(string):
     return ' '.join(string[i:i + 8] for i in range(0, 32, 8))
 
@@ -130,15 +133,12 @@ Valid host addresses are those all between the network address and the broadcast
 
 ```python
 # Network Address ------------------------------------------------------------>
-
 network = input("Network Address [xxx.xxx.xxx.xxx]: ")
 
 # Broadcast Address ---------------------------------------------------------->
-
 broadcast = input("Broadcast Address [xxx.xxx.xxx.xxx]: ")
 
 # Hosts Addresses ------------------------------------------------------------>
-
 print(f"Host min -> {network} + 1\nHost max -> {broadcast} - 1")
 ```
 
